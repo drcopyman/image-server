@@ -4,12 +4,14 @@ const helmet = require("helmet");
 const morgan = require("morgan");
 const Ratelimiter = require("./util/Ratelimiter");
 const Uploads = require("./controllers/uploads.js");
+const cors = require("cors");
 
 const app = express();
 const ratelimiter = new Ratelimiter();
 
 app.use(morgan("dev"));
 app.use(helmet());
+app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(ratelimiter.middleware.bind(ratelimiter));
